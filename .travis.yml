@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true arseniibylym/docker-travis-aws npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-central-1'
+  app: 'docker-travis-aws'
+  env: 'Dockertravisaws-env'
+  bucket_name: 'elasticbeanstalk-eu-central-1-440556563663'
+  bucket_path: 'docker-travis-aws'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
